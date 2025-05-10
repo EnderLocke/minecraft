@@ -2,7 +2,10 @@
   "milestones": [
     {
       "count": 10,
-      "message": "🎉 Congrats on your 10th login!"
+      "message": "🎉 Congrats on your 10th login!",
+      "items": [
+        { "id": "minecraft:diamond", "count": 1 }
+      ]
     },
     {
       "count": 50,

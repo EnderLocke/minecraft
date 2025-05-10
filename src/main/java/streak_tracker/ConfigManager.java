@@ -9,27 +9,59 @@ import java.util.Map;
 
 public class ConfigManager {
 
-    private static final Path CONFIG_PATH = Path.of("config/loginstreakmod_rewards.json");
-    private static final Map<Integer, String> milestoneMessages = new HashMap<>();
+    private static final Path TOTAL_CONFIG_PATH = Path.of("config/totallogincheck_rewards.json");
+    private static final Path STREAK_CONFIG_PATH = Path.of("config/streaklogincheck_rewards.json");
+
+    private static final Map<Integer, MilestoneReward> totalLoginMilestones = new HashMap<>();
+    private static final Map<Integer, MilestoneReward> streakLoginMilestones = new HashMap<>();
 
     public static void loadMilestones() {
-        try (FileReader reader = new FileReader(CONFIG_PATH.toFile())) {
+        loadConfigFile(TOTAL_CONFIG_PATH, totalLoginMilestones);
+        loadConfigFile(STREAK_CONFIG_PATH, streakLoginMilestones);
+    }
+
+    private static void loadConfigFile(Path path, Map<Integer, MilestoneReward> milestoneMap) {
+        try (FileReader reader = new FileReader(path.toFile())) {
             JsonObject config = new Gson().fromJson(reader, JsonObject.class);
             JsonArray milestones = config.getAsJsonArray("milestones");
 
             for (JsonElement element : milestones) {
-                JsonObject milestone = element.getAsJsonObject();
-                int count = milestone.get("count").getAsInt();
-                String message = milestone.get("message").getAsString();
-                milestoneMessages.put(count, message);
+                JsonObject obj = element.getAsJsonObject();
+                int count = obj.get("count").getAsInt();
+                String message = obj.get("message").getAsString();
+
+                List<MilestoneReward.ItemReward> itemRewards = new ArrayList<>();
+                if (obj.has("items")) {
+                    JsonArray items = obj.getAsJsonArray("items");
+                    for (JsonElement itemElem : items) {
+                        JsonObject itemObj = itemElem.getAsJsonObject();
+                        String id = itemObj.get("id").getAsString();
+                        int amount = itemObj.get("count").getAsInt();
+                        itemRewards.add(new MilestoneReward.ItemReward(id, amount));
+                    }
+                }
+
+                milestoneMap.put(count, new MilestoneReward(message, itemRewards));
             }
 
         } catch (IOException | JsonParseException e) {
-            System.err.println("Failed to load milestone config: " + e.getMessage());
+            System.err.println("Failed to load config: " + path + " — " + e.getMessage());
         }
     }
 
-    public static String getMilestoneMessage(int loginCount) {
-        return milestoneMessages.getOrDefault(loginCount, null);
+    public static MilestoneReward getTotalLoginReward(int loginCount) {
+        return totalLoginMilestones.get(loginCount);
+    }
+
+    public static MilestoneReward getStreakLoginReward(int streakCount) {
+        return streakLoginMilestones.get(streakCount);
+    }
+
+    public static String getTotalLoginMessage(int loginCount) {
+        return totalLoginMilestones.get(loginCount);
+    }
+
+    public static String getStreakLoginMessage(int streakCount) {
+        return streakLoginMilestones.get(streakCount);
     }
 }
