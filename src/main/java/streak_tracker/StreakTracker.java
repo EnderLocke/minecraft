@@ -1,5 +1,7 @@
 package loginstreakmod;
 
+import loginstreakmod.LoginChecks;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -25,6 +27,7 @@ public class StreakTracker {
 
         LocalDate today = LocalDate.now(ZoneOffset.UTC);
         int newStreak = 1;
+        int totalLogins = 1;
 
         try {
             if (!Files.exists(DATA_DIR)) {
@@ -36,24 +39,31 @@ public class StreakTracker {
                 data = JsonParser.parseReader(Files.newBufferedReader(playerFile)).getAsJsonObject();
 
                 LocalDate lastLogin = LocalDate.parse(data.get("lastLogin").getAsString());
-                int streak = data.get("streak").getAsInt();
+                int previousStreak = data.get("streak").getAsInt();
+                totalLogins = data.get("totalLogins").getAsInt() + 1;
 
                 if (lastLogin.plusDays(1).isEqual(today)) {
-                    newStreak = streak + 1;
+                    newStreak = previousStreak + 1;
                 } else if (lastLogin.isEqual(today)) {
-                    newStreak = streak; // already logged in today
+                    newStreak = previousStreak; // same day, don't increase
+                    totalLogins--; // cancel out the increment
                 }
-                // if not consecutive, it resets to 1
+                // otherwise, reset streak to 1
             }
 
             data.addProperty("lastLogin", today.toString());
             data.addProperty("streak", newStreak);
+            data.addProperty("totalLogins", totalLogins);
             Files.writeString(playerFile, GSON.toJson(data));
 
             player.sendMessage(Text.literal("📅 Login Streak: " + newStreak + " day(s)!"), false);
+            player.sendMessage(Text.literal("🧮 Total Logins: " + totalLogins), false);
+
+            LoginChecks.checkMilestoneLogin(player, totalLogins);
+
         } catch (IOException e) {
             e.printStackTrace();
-            player.sendMessage(Text.literal("⚠ Failed to track login streak."), false);
+            player.sendMessage(Text.literal("⚠ Failed to track login data."), false);
         }
     }
 }
