@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "loginstreakmod",
+  "version": "1.0.0",
+  "name": "Login Streak Mod",
+  "description": "Tracks how many days in a row players log in.",
+  "entrypoints": {
+    "main": [
+      "your.package.name.ModMain"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.0",
+    "minecraft": "1.20.x",
+    "fabric-api": "*"
+  }
+}
