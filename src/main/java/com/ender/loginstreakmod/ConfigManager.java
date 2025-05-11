@@ -65,7 +65,7 @@ public class ConfigManager {
     }
 
     public static String getStreakLoginMessage(int streakCount) {
-        MilestoneReward reward = streakLoginMilestones.get(loginCount);
+        MilestoneReward reward = streakLoginMilestones.get(streakCount);
         return reward != null ? reward.message : null;
     }
 }

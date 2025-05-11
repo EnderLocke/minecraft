@@ -59,7 +59,7 @@ public class StreakTracker {
             player.sendMessage(Text.literal("📅 Login Streak: " + newStreak + " day(s)!"), false);
             player.sendMessage(Text.literal("🧮 Total Logins: " + totalLogins), false);
 
-            LoginChecks.checkMilestoneLogin(player, totalLogins);
+            LoginChecks.checkLogins(player, totalLogins, newStreak);
 
         } catch (IOException e) {
             e.printStackTrace();
