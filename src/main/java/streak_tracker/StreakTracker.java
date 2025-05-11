@@ -1,4 +1,4 @@
-package loginstreakmod;
+package com.ender.loginstreakmod;
 
 import loginstreakmod.LoginChecks;
 

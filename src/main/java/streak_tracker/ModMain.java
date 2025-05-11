@@ -1,4 +1,4 @@
-package loginstreakmod;
+package com.ender.loginstreakmod;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;

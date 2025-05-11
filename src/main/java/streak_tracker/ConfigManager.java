@@ -1,4 +1,4 @@
-package loginstreakmod;
+package com.ender.loginstreakmod;
 
 import com.google.gson.*;
 import java.io.FileReader;
