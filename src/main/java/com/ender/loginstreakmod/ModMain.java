@@ -8,6 +8,11 @@ public class ModMain implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        // Load milestone configuration at mod initialization
+        ConfigManager.loadMilestones();
+        System.out.println("[" + MOD_ID + "] Loaded milestone rewards.");
+
+        // Register login event
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             StreakTracker.onPlayerJoin(handler.getPlayer());
         });

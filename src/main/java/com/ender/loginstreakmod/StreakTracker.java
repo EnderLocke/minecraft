@@ -1,7 +1,5 @@
 package com.ender.loginstreakmod;
 
-import com.ender.loginstreakmod.LoginChecks;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -28,6 +26,7 @@ public class StreakTracker {
         LocalDate today = LocalDate.now(ZoneOffset.UTC);
         int newStreak = 1;
         int totalLogins = 1;
+        boolean isNewLoginToday = true;
 
         try {
             if (!Files.exists(DATA_DIR)) {
@@ -43,13 +42,19 @@ public class StreakTracker {
 
                 LocalDate lastLogin = LocalDate.parse(data.get("lastLogin").getAsString());
                 int previousStreak = data.get("streak").getAsInt();
-                totalLogins = data.get("totalLogins").getAsInt() + 1;
+                totalLogins = data.get("totalLogins").getAsInt();
 
                 if (lastLogin.plusDays(1).isEqual(today)) {
                     newStreak = previousStreak + 1;
+                    totalLogins += 1;
+                    isNewLoginToday = true;
                 } else if (lastLogin.isEqual(today)) {
                     newStreak = previousStreak;
-                    totalLogins--;
+                    isNewLoginToday = false; // already logged in today
+                } else {
+                    newStreak = 1;
+                    totalLogins += 1;
+                    isNewLoginToday = true;
                 }
             }
 
@@ -69,7 +74,10 @@ public class StreakTracker {
                 player.sendMessage(Text.literal("🎉 First login recorded: " + today), false);
             }
 
-            LoginChecks.checkLogins(player, totalLogins, newStreak);
+            // Only give rewards once per new day
+            if (isNewLoginToday) {
+                LoginChecks.checkLogins(player, totalLogins, newStreak);
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
