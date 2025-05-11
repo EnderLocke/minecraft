@@ -5,7 +5,7 @@ plugins {
 
 archivesBaseName = "loginstreakmod"
 group = 'com.ender'
-version = '0.0.2'
+version = ${project.mod_version}
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21

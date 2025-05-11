@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "loginstreakmod",
   "authors": ["Ender Locke"],
-  "version": "0.0.2",
+  "version": "0.0.3",
   "name": "Login Streak Mod",
   "description": "Tracks how many days in a row players log in.",
   "entrypoints": {
