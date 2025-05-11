@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "loginstreakmod",
+  "authors": ["Ender Locke"],
+  "version": "0.0.2",
+  "name": "Login Streak Mod",
+  "description": "Tracks how many days in a row players log in.",
+  "entrypoints": {
+    "main": [
+      "com.ender.loginstreakmod.ModMain"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "1.21.1",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
