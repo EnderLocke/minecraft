@@ -1,9 +1,11 @@
 package com.ender.loginstreakmod;
 
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import net.minecraft.text.Text;
 
 public class LoginChecks {
 
@@ -22,7 +24,7 @@ public class LoginChecks {
 
         // Give items
         for (MilestoneReward.ItemReward itemReward : reward.items) {
-            Identifier itemId = new Identifier(itemReward.id);
+            Identifier itemId = new Identifier("loginstreakmod", itemReward.id);
             Item item = Registries.ITEM.get(itemId);
             if (item != null) {
                 ItemStack stack = new ItemStack(item, itemReward.count);

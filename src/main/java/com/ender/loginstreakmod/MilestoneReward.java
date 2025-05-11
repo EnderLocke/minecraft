@@ -1,6 +1,6 @@
 package com.ender.loginstreakmod;
 
-mport java.util.List;
+import java.util.List;
 
 public class MilestoneReward {
     public final String message;

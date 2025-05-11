@@ -9,11 +9,17 @@
     },
     {
       "count": 14,
-      "message": "🔥 You've reached 14 straight logins! Keep it up!"
+      "message": "🔥 You've reached 14 straight logins! Keep it up!",
+      "items": [
+        { "id": "minecraft:diamond", "count": 1 }
+      ]
     },
     {
       "count": 21,
-      "message": "💯 3 weeks! You're unstoppable!"
+      "message": "💯 3 weeks! You're unstoppable!",
+      "items": [
+        { "id": "minecraft:diamond", "count": 1 }
+      ]
     }
   ]
 }

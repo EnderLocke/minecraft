@@ -1,6 +1,8 @@
 package com.ender.loginstreakmod;
 
 import com.google.gson.*;
+import java.util.List;
+import java.util.ArrayList;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -58,10 +60,12 @@ public class ConfigManager {
     }
 
     public static String getTotalLoginMessage(int loginCount) {
-        return totalLoginMilestones.get(loginCount);
+        MilestoneReward reward = totalLoginMilestones.get(loginCount);
+        return reward != null ? reward.message : null;
     }
 
     public static String getStreakLoginMessage(int streakCount) {
-        return streakLoginMilestones.get(streakCount);
+        MilestoneReward reward = streakLoginMilestones.get(loginCount);
+        return reward != null ? reward.message : null;
     }
 }

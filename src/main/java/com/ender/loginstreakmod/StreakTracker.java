@@ -1,6 +1,6 @@
 package com.ender.loginstreakmod;
 
-import loginstreakmod.LoginChecks;
+import com.ender.loginstreakmod.LoginChecks;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
