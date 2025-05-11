@@ -3,8 +3,9 @@ plugins {
     id 'maven-publish'
 }
 
-group = 'com.enderlocke'
-version = '1.0.0'
+archivesBaseName = "loginstreakmod"
+group = 'com.ender'
+version = '0.0.1'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
@@ -16,10 +17,10 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:1.21.1"
-    mappings "net.fabricmc:yarn:1.21.1+build.3:v2"
-    modImplementation "net.fabricmc:fabric-loader:0.14.21"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:0.102.1+1.21.1"
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 }
 
 loom {
