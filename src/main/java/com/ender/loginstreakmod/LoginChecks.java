@@ -24,7 +24,11 @@ public class LoginChecks {
 
         // Give items
         for (MilestoneReward.ItemReward itemReward : reward.items) {
-            Identifier itemId = Identifier.of("loginstreakmod", itemReward.id);
+            Identifier itemId = Identifier.tryParse(itemReward.id);
+            if (itemId == null) {
+                System.err.println("Invalid item ID: " + itemReward.id);
+                continue;
+            }
             Item item = Registries.ITEM.get(itemId);
             if (item != null) {
                 ItemStack stack = new ItemStack(item, itemReward.count);
