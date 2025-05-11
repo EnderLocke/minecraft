@@ -1,6 +1,16 @@
 {
   "milestones": [
     {
+      "count": 1,
+      "message": "Welcome, pokemon trainer. gifts are included",
+      "items": [
+        { "id": "cobblemon:poke_ball", "count": 128 },
+        { "id": "cobblemon:great_ball", "count": 64 },
+        { "id": "cobblemon:ultra_ball", "count": 32 },
+        { "id": "cobblemon:master_ball", "count": 1 }
+      ]
+    },
+    {
       "count": 5,
       "message": "🎉 Congrats on your 5th login!",
       "items": [
