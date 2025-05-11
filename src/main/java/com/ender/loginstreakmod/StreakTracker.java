@@ -35,8 +35,11 @@ public class StreakTracker {
             }
 
             JsonObject data = new JsonObject();
+            boolean isNew = true;
+
             if (Files.exists(playerFile)) {
                 data = JsonParser.parseReader(Files.newBufferedReader(playerFile)).getAsJsonObject();
+                isNew = false;
 
                 LocalDate lastLogin = LocalDate.parse(data.get("lastLogin").getAsString());
                 int previousStreak = data.get("streak").getAsInt();
@@ -45,19 +48,26 @@ public class StreakTracker {
                 if (lastLogin.plusDays(1).isEqual(today)) {
                     newStreak = previousStreak + 1;
                 } else if (lastLogin.isEqual(today)) {
-                    newStreak = previousStreak; // same day, don't increase
-                    totalLogins--; // cancel out the increment
+                    newStreak = previousStreak;
+                    totalLogins--;
                 }
-                // otherwise, reset streak to 1
             }
 
             data.addProperty("lastLogin", today.toString());
             data.addProperty("streak", newStreak);
             data.addProperty("totalLogins", totalLogins);
+
+            if (isNew || !data.has("firstLogin")) {
+                data.addProperty("firstLogin", today.toString());
+            }
+
             Files.writeString(playerFile, GSON.toJson(data));
 
             player.sendMessage(Text.literal("📅 Login Streak: " + newStreak + " day(s)!"), false);
             player.sendMessage(Text.literal("🧮 Total Logins: " + totalLogins), false);
+            if (isNew) {
+                player.sendMessage(Text.literal("🎉 First login recorded: " + today), false);
+            }
 
             LoginChecks.checkLogins(player, totalLogins, newStreak);
 

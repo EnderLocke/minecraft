@@ -1,10 +1,38 @@
 {
   "milestones": [
     {
+      "count": 1,
+      "message": "you've logged in for 1 day in a row, cool?",
+      "items": [
+        { "id": "cobblemon:poke_ball", "count": 16 }
+      ]
+    },
+    {
+      "count": 2,
+      "message": "you've logged in for 2 days in a row!!",
+      "items": [
+        { "id": "cobblemon:great_ball", "count": 16 }
+      ]
+    },
+    {
+      "count": 3,
+      "message": "you've logged in for 3 days in a row!!",
+      "items": [
+        { "id": "cobblemon:safari_ball", "count": 16 }
+      ]
+    },
+    {
+      "count": 4,
+      "message": "you've logged in for 4 days in a row!!",
+      "items": [
+        { "id": "cobblemon:great_ball", "count": 32 }
+      ]
+    },
+    {
       "count": 7,
       "message": "🎉 Congrats on your week straight!",
       "items": [
-        { "id": "minecraft:diamond", "count": 1 }
+        { "id": "minecraft:diamond", "count": 16 }
       ]
     },
     {
@@ -19,6 +47,13 @@
       "message": "💯 3 weeks! You're unstoppable!",
       "items": [
         { "id": "minecraft:diamond", "count": 1 }
+      ]
+    },
+    {
+      "count": 30,
+      "message": "💯 3 weeks! You're unstoppable!",
+      "items": [
+        { "id": "cobblemon:master_ball", "count": 1 }
       ]
     }
   ]
